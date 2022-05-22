@@ -1,6 +1,8 @@
 package dev.hschulz.parkingcontrol.DTOS;
 
 
+import dev.hschulz.parkingcontrol.models.Car;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -10,7 +12,7 @@ public class ParkingSpotDTO {
     @Size(max = 10)
     private String parkingSpotNumber;
 
-    @NotBlank
+   /* @NotBlank
     @Size(max = 7)
     private String licensePlateCar;
 
@@ -24,7 +26,7 @@ public class ParkingSpotDTO {
 
     @NotBlank
     @Size(max = 70)
-    private String colorCar;
+    private String colorCar;*/
 
     @NotBlank
     @Size(max = 130)
@@ -38,6 +40,16 @@ public class ParkingSpotDTO {
     @Size(max = 30)
     private String block;
 
+    private Car car;
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
     public String getParkingSpotNumber() {
         return parkingSpotNumber;
     }
@@ -45,7 +57,7 @@ public class ParkingSpotDTO {
     public void setParkingSpotNumber(String parkingSpotNumber) {
         this.parkingSpotNumber = parkingSpotNumber;
     }
-
+/*
     public String getLicensePlateCar() {
         return licensePlateCar;
     }
@@ -76,7 +88,7 @@ public class ParkingSpotDTO {
 
     public void setColorCar(String colorCar) {
         this.colorCar = colorCar;
-    }
+    }*/
 
     public String getResponsibleName() {
         return responsibleName;

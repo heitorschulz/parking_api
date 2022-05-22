@@ -1,13 +1,13 @@
 package dev.hschulz.parkingcontrol.services;
 
-import dev.hschulz.parkingcontrol.models.ParkingSpotModel;
+import dev.hschulz.parkingcontrol.models.ParkingSpot;
 import dev.hschulz.parkingcontrol.repositories.ParkingSpotRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 // Em 55:00 fala sobre criar uma interface desse service e usar para regras de negócios
@@ -18,21 +18,27 @@ public class ParkingSpotService {
 
     final ParkingSpotRepository parkingSpotRepository;
 
-    public ParkingSpotService(ParkingSpotRepository parkingSpotRepository) {
+    final
+    CarService carService;
+
+    public ParkingSpotService(ParkingSpotRepository parkingSpotRepository, CarService carService) {
         this.parkingSpotRepository = parkingSpotRepository;
+        this.carService = carService;
     }
+
+
 
     @Transactional
-    public ParkingSpotModel save(ParkingSpotModel parkingSpotModel) {
-        return parkingSpotRepository.save(parkingSpotModel);
+    public ParkingSpot save(ParkingSpot parkingSpot) {
+        return parkingSpotRepository.save(parkingSpot);
     }
 
-    public Page<ParkingSpotModel> findAll(Pageable pageable) {
+    public Page<ParkingSpot> findAll(Pageable pageable) {
         return parkingSpotRepository.findAll(pageable);
     }
 
     public boolean existsByLicensePlateCar(String licensePlateCar) {
-        return parkingSpotRepository.existsByLicensePlateCar(licensePlateCar);
+        return carService.existsByLicensePlateCar(licensePlateCar);
     }
 
     public boolean existsByParkingSpotNumber(String parkingSpotNumber) {
@@ -43,13 +49,13 @@ public class ParkingSpotService {
         return parkingSpotRepository.existsByApartmentAndBlock(apartment,block);
     }
 
-    public Optional<ParkingSpotModel> findById(Long id) {
+    public Optional<ParkingSpot> findById(Long id) {
         return parkingSpotRepository.findById(id);
     }
 
     @Transactional
-    public void delete(ParkingSpotModel parkingSpotModel) {
-        parkingSpotRepository.delete(parkingSpotModel);
+    public void delete(ParkingSpot parkingSpot) {
+        parkingSpotRepository.delete(parkingSpot);
     }
 
 }

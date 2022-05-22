@@ -1,12 +1,14 @@
 package dev.hschulz.parkingcontrol.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "TB_PARKING_SPOT")
-public class ParkingSpotModel implements Serializable {
+public class ParkingSpot implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -16,7 +18,7 @@ public class ParkingSpotModel implements Serializable {
     @Column(nullable = false, unique = true, length = 10)
     private String parkingSpotNumber;
 
-    @Column(nullable = false, unique = true, length = 7)
+    /*@Column(nullable = false, unique = true, length = 7)
     private String licensePlateCar;
 
     @Column(nullable = false, length = 70)
@@ -27,7 +29,7 @@ public class ParkingSpotModel implements Serializable {
 
     @Column(nullable = false, length = 70)
     private String colorCar;
-
+*/
     @Column(nullable = false)
     private LocalDateTime registrationDate;
 
@@ -39,6 +41,19 @@ public class ParkingSpotModel implements Serializable {
 
     @Column(nullable = false, length = 30)
     private String block;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "car_id", referencedColumnName = "id", nullable = false)
+    //@RestResource(path = "parkingSpotCar", rel="car")
+    private Car car;
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
 
     public Long getId() {
         return id;
@@ -55,6 +70,7 @@ public class ParkingSpotModel implements Serializable {
     public void setParkingSpotNumber(String parkingSpotNumber) {
         this.parkingSpotNumber = parkingSpotNumber;
     }
+/*
 
     public String getLicensePlateCar() {
         return licensePlateCar;
@@ -87,6 +103,7 @@ public class ParkingSpotModel implements Serializable {
     public void setColorCar(String colorCar) {
         this.colorCar = colorCar;
     }
+*/
 
     public LocalDateTime getRegistrationDate() {
         return registrationDate;
