@@ -1,6 +1,7 @@
 package dev.hschulz.parkingcontrol.controllers;
 
 import dev.hschulz.parkingcontrol.DTOS.ParkingSpotDTO;
+import dev.hschulz.parkingcontrol.models.Car;
 import dev.hschulz.parkingcontrol.models.ParkingSpot;
 import dev.hschulz.parkingcontrol.services.ParkingSpotService;
 import org.springframework.beans.BeanUtils;
@@ -95,11 +96,17 @@ public class ParkingSpotController {
 
         //Modo 2
 
-        var parkingSpotModel = new ParkingSpot();
-        BeanUtils.copyProperties(parkingSpotDTO,parkingSpotModel);
-        parkingSpotModel.setId(parkingSpotModelOptional.get().getId());
-        parkingSpotModel.setRegistrationDate(parkingSpotModelOptional.get().getRegistrationDate());
-        return ResponseEntity.status(HttpStatus.OK).body(parkingSpotService.save(parkingSpotModel));
+        var parkingSpot = new ParkingSpot();
+        BeanUtils.copyProperties(parkingSpotDTO,parkingSpot);
+
+        var car = new Car();
+        BeanUtils.copyProperties(parkingSpotDTO.getCar(),car);
+        car.setId(parkingSpotModelOptional.get().getCar().getId());
+        parkingSpot.setCar(car);
+
+        parkingSpot.setId(parkingSpotModelOptional.get().getId());
+        parkingSpot.setRegistrationDate(parkingSpotModelOptional.get().getRegistrationDate());
+        return ResponseEntity.status(HttpStatus.OK).body(parkingSpotService.save(parkingSpot));
 
     }
 }
