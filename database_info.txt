@@ -1,0 +1,26 @@
+Banco de dados: parking_api
+Nome de usuário: parking25
+Senha: parking25#
+Email: hectorie3@gmail.com
+Host: db4free.net 
+Porta: 3306
+
+
+https://www.db4free.net/phpMyAdmin/
+
+
+ou
+
+
+https://remotemysql.com/dashboard.php
+hectorie3@gmail.com
+parking25#
+
+
+Username: 0bL1SYjRoF
+Database name: 0bL1SYjRoF
+Password: FOD1rfc3to
+Server: remotemysql.com
+Port: 3306
+
+These are the username and password to log in to your database and phpMyAdmin
